@@ -1,0 +1,5 @@
+Django==2.0.2
+djangorestframework==3.7.7
+google-api-python-client==1.6.5
+social-auth-app-django==2.1.0
+social-auth-core==1.7.0
