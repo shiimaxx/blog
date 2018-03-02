@@ -1,3 +1,4 @@
 from django.contrib import admin
+from aggregator.models import QiitaEntry
 
-# Register your models here.
+admin.site.register(QiitaEntry)
