@@ -8,7 +8,7 @@ import requests
 
 
 class Command(BaseCommand):
-    help = 'test'
+    help = 'Fetch and save for qiita entries'
 
     def _fetch_qiita_entries(self, qiita_id):
         base_url = 'https://qiita.com/api/v2'
