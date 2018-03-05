@@ -22,8 +22,6 @@ class Command(BaseCommand):
 
         entries = []
         for entry_json in entries_json:
-            if entry_json['private']:
-                continue
             entries.append(
                 QiitaEntry(
                     id=entry_json['id'],
