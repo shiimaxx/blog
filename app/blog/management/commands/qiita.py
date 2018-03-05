@@ -20,17 +20,17 @@ class Command(BaseCommand):
         for user in users:
             entries_json = self._fetch_qiita_entries(user.qiita_id)
 
-        entries = []
-        for entry_json in entries_json:
-            entries.append(
-                QiitaEntry(
-                    id=entry_json['id'],
-                    title=entry_json['title'],
-                    url=entry_json['url'],
-                    created_at=entry_json['created_at'],
-                    user=User.get_from_qiita_id(entry_json['user']['id'])
-                )
+        entries = [
+            QiitaEntry(
+                id=entry_json['id'],
+                title=entry_json['title'],
+                url=entry_json['url'],
+                created_at=entry_json['created_at'],
+                user=User.get_from_qiita_id(entry_json['user']['id'])
             )
+            for entry_json in entries_json
+            if not QiitaEntry.objects.filter(id=entry_json['id']).exists()
+        ]
         QiitaEntry.objects.bulk_create(entries)
 
     def handle(self, *args, **options):
