@@ -11,6 +11,6 @@ users_router = routers.NestedSimpleRouter(router, r'users', lookup='user')
 users_router.register(r'qiitaentries', QiitaEntryViewSet, base_name='qiitaentries')
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('', include(users_router.urls)),
+    path('v1/', include(router.urls)),
+    path('v1/', include(users_router.urls)),
 ]
