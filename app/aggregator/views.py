@@ -13,5 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class QiitaEntryViewSet(viewsets.ModelViewSet):
-    queryset = QiitaEntry.objects.all()
     serializer_class = QiitaEntrySerializer
+
+    def get_queryset(self):
+        return QiitaEntry.objects.filter(user=self.kwargs['user_pk'])
