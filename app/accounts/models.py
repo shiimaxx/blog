@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    qiita_id = models.CharField(max_length=128, null=True)
+    qiita_id = models.CharField(unique=True, max_length=128, null=True)
 
     @classmethod
     def find_qiita_user(cls):
