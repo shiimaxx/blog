@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'blog',
     'accounts',
     'aggregator',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [
