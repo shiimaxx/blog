@@ -4,8 +4,6 @@ from datetime import datetime, timedelta
 import json
 from unittest.mock import Mock, patch
 
-from pytz import timezone
-
 from accounts.models import User
 from aggregator.models import QiitaEntry
 from blog.management.commands.qiita import save_qiita_entries
