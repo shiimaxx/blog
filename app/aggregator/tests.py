@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from datetime import datetime
+import json
 from pytz import timezone
 
 from accounts.models import User
@@ -67,3 +68,20 @@ class QiitaEntryTests(APITestCase):
         response = self.client.get('/api/v1/users/{}/qiitaentries/'.format(self.dummy_user3.id))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 0)
+
+    def test_method_not_allowd(self):
+        entry = {
+            'id': 'dummy_id5',
+            'title': 'dummy_entry5',
+            'url': 'https://qiita.com/dummy_qiita_user2/item/dummy_entry5',
+            'created_at': '2018-03-01T00:00:00+09:00',
+            'user': '{"id": "dummy_qiita_user1"}'
+        }
+        response = self.client.post('/api/v1/users/{}/qiitaentries/'.format(self.dummy_user1.id), data=entry)
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.put('/api/v1/users/{}/qiitaentries/'.format(self.dummy_user1.id), data=entry)
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.delete('/api/v1/users/{}/qiitaentries/dummy_id1/'.format(self.dummy_user1.id))
+        self.assertEqual(response.status_code, 405)
