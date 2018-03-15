@@ -9,7 +9,7 @@ from accounts.models import User
 from aggregator.models import QiitaEntry
 
 
-class QiitaEntryTests(APITestCase):
+class QiitaEntryApiTests(APITestCase):
     def setUp(self):
         self.dummy_user1 = User.objects.create(
             username='dummy_user1',

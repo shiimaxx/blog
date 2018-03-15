@@ -49,7 +49,7 @@ def mocked_requests_get(*args):
     return dummy_response
 
 
-class TestQiita(TestCase):
+class QiitaCommandTest(TestCase):
 
     @patch('blog.management.commands.qiita.requests')
     def test_save_qiita_entries(self, mock_requests):
