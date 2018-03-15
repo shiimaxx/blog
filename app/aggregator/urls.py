@@ -2,7 +2,8 @@ from django.urls import path, include
 
 from rest_framework_nested import routers
 from rest_framework_swagger.views import get_swagger_view
-from aggregator.views import UserViewSet, QiitaEntryViewSet
+from aggregator.views import QiitaEntryViewSet
+from accounts.views import UserViewSet
 
 schema_view = get_swagger_view(title='Blog Aggregator API')
 
