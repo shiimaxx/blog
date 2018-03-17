@@ -5,13 +5,13 @@ from accounts.models import User
 
 class UserModelTests(APITestCase):
     def test_is_empty(self):
-        entry = User.objects.all()
-        self.assertEqual(entry.count(), 0)
+        user = User.objects.all()
+        self.assertEqual(user.count(), 0)
 
     def test_is_not_empty(self):
-        dummy_user1 = User.objects.create(
+        User.objects.create(
             username='dummy_user1',
             qiita_id='dummy_qiita_user1'
         )
-        entry = User.objects.all()
-        self.assertEqual(entry.count(), 1)
+        user = User.objects.all()
+        self.assertEqual(user.count(), 1)
