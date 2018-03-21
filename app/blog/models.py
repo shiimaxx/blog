@@ -10,11 +10,11 @@ class Category(models.Model):
 
 
 # Create your models here.
-class Entry(models.Model):
+class BlogEntry(models.Model):
     created_at = models.DateTimeField()
     id = models.CharField(primary_key=True, max_length=128)
     title = models.CharField(max_length=128)
-    body = models.TextField()
+    content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
