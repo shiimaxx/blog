@@ -12,7 +12,6 @@ class Category(models.Model):
 # Create your models here.
 class BlogEntry(models.Model):
     created_at = models.DateTimeField()
-    id = models.CharField(primary_key=True, max_length=128)
     title = models.CharField(max_length=128)
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
