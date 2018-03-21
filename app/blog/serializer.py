@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from blog.models import Entry
+from blog.models import BlogEntry
 
 
-class EntrySerializer(serializers.ModelSerializer):
+class BlogEntrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = QiitaEntry
-        fields = ('id', 'title', 'url', 'created_at', 'user')
+        model = BlogEntry
+        fields = ('id', 'title', 'content', 'created_at', 'category', 'user')

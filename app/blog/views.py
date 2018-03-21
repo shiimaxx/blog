@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 
-from blog.models import Entry
-from blog.serializer import EntrySerializer
+from blog.models import BlogEntry
+from blog.serializer import BlogEntrySerializer
 
 
-class EntryViewSet(viewsets.ModelViewSet):
-    serializer_class = EntrySerializer
+class BlogEntryViewSet(viewsets.ModelViewSet):
+    serializer_class = BlogEntrySerializer
     http_method_names = ['get', 'head', 'options']
 
     def get_queryset(self):
-        return Entry.objects.filter(user=self.kwargs['user_pk'])
+        return BlogEntry.objects.filter(user=self.kwargs['user_pk'])
