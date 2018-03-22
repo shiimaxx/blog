@@ -15,13 +15,11 @@ class BlogEntryModelTests(APITestCase):
     def test_is_not_empty(self):
         dummy_user1 = User.objects.create(
             username='dummy_user1',
-            qiita_id='dummy_qiita_user1'
         )
         dummy_category1 = Category.objects.create(
             name='dummy_category1'
         )
         BlogEntry.objects.create(
-            id='dummy_id1',
             title='dummy_entry1',
             content='dummy_content1',
             category=dummy_category1,
