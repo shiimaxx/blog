@@ -1,8 +1,9 @@
-from django.test import TestCase
 
 from datetime import datetime, timedelta
 import json
 from unittest.mock import Mock, patch
+
+from django.test import TestCase
 
 from accounts.models import User
 from aggregator.models import QiitaEntry
@@ -13,37 +14,39 @@ def mocked_requests_get(*args):
     dummy_response = Mock()
 
     if args[0] == 'https://qiita.com/api/v2/users/dummy_qiita_user1/items':
-        dummy_response.text = json.dumps([{
-            'id': 'dummy_id1',
-            'title': 'dummy_entry1',
-            'url': 'https://qiita.com/dummy_qiita_user1/item/dummy_entry1',
-            'created_at': '2018-01-01T00:00:00+09:00',
-            'user': {'id': 'dummy_qiita_user1'}
-        },
-        {
-            'id': 'dummy_id2',
-            'title': 'dummy_entry2',
-            'url': 'https://qiita.com/dummy_qiita_user1/item/dummy_entry2',
-            'created_at': '2018-01-05T10:00:00+09:00',
-            'user': {'id': 'dummy_qiita_user1'}
-        },
+        dummy_response.text = json.dumps([
+            {
+                'id': 'dummy_id1',
+                'title': 'dummy_entry1',
+                'url': 'https://qiita.com/dummy_qiita_user1/item/dummy_entry1',
+                'created_at': '2018-01-01T00:00:00+09:00',
+                'user': {'id': 'dummy_qiita_user1'}
+            },
+            {
+                'id': 'dummy_id2',
+                'title': 'dummy_entry2',
+                'url': 'https://qiita.com/dummy_qiita_user1/item/dummy_entry2',
+                'created_at': '2018-01-05T10:00:00+09:00',
+                'user': {'id': 'dummy_qiita_user1'}
+            },
         ])
 
     if args[0] == 'https://qiita.com/api/v2/users/dummy_qiita_user2/items':
-        dummy_response.text = json.dumps([{
-            'id': 'dummy_id3',
-            'title': 'dummy_entry3',
-            'url': 'https://qiita.com/dummy_qiita_user2/item/dummy_entry3',
-            'created_at': '2018-02-11T07:20:00+09:00',
-            'user': {'id': 'dummy_qiita_user2'}
-        },
-        {
-            'id': 'dummy_id4',
-            'title': 'dummy_entry4',
-            'url': 'https://qiita.com/dummy_qiita_user2/item/dummy_entry4',
-            'created_at': '2018-02-20T14:15:00+09:00',
-            'user': {'id': 'dummy_qiita_user2'}
-        },
+        dummy_response.text = json.dumps([
+            {
+                'id': 'dummy_id3',
+                'title': 'dummy_entry3',
+                'url': 'https://qiita.com/dummy_qiita_user2/item/dummy_entry3',
+                'created_at': '2018-02-11T07:20:00+09:00',
+                'user': {'id': 'dummy_qiita_user2'}
+            },
+            {
+                'id': 'dummy_id4',
+                'title': 'dummy_entry4',
+                'url': 'https://qiita.com/dummy_qiita_user2/item/dummy_entry4',
+                'created_at': '2018-02-20T14:15:00+09:00',
+                'user': {'id': 'dummy_qiita_user2'}
+            },
         ])
 
     return dummy_response

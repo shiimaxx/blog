@@ -1,7 +1,6 @@
-from rest_framework.test import APITestCase
-
 from datetime import datetime
-import json
+
+from rest_framework.test import APITestCase
 from pytz import timezone
 
 from accounts.models import User

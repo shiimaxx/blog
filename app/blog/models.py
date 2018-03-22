@@ -9,7 +9,6 @@ class Category(models.Model):
         return self.name
 
 
-# Create your models here.
 class BlogEntry(models.Model):
     created_at = models.DateTimeField()
     title = models.CharField(max_length=128)
