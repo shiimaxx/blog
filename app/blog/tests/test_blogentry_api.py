@@ -36,7 +36,7 @@ class BlogEntryApiTests(APITestCase):
             category=self.dummy_category1,
             user=self.dummy_user1
         )
-        self.dummy_entry2 =  BlogEntry.objects.create(
+        self.dummy_entry2 = BlogEntry.objects.create(
             title='dummy_entry2',
             content='dummy_content2',
             created_at=add_timezone(datetime(2018, 1, 5, 10, 0)),

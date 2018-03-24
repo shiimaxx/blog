@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from accounts.models import User
 from aggregator.models import QiitaEntry
 
@@ -12,6 +12,7 @@ def _fetch_qiita_entries(qiita_id):
     endpoint = '{base_url}/users/{qiita_id}/items'.format(base_url=base_url, qiita_id=qiita_id)
     response = requests.get(endpoint)
     return json.loads(response.text)
+
 
 def save_qiita_entries(users):
     for user in users:
@@ -29,6 +30,7 @@ def save_qiita_entries(users):
             if not QiitaEntry.objects.filter(id=entry_json['id']).exists()
         ]
         QiitaEntry.objects.bulk_create(entries)
+
 
 class Command(BaseCommand):
     help = 'Fetch and save for qiita entries'
