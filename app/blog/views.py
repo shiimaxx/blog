@@ -4,9 +4,15 @@ from blog.models import BlogEntry
 from blog.serializer import BlogEntrySerializer
 
 
-class BlogEntryViewSet(viewsets.ModelViewSet):
+class UserBlogEntryViewSet(viewsets.ModelViewSet):
     serializer_class = BlogEntrySerializer
-    http_method_names = ['get', 'head', 'options', 'post', 'delete']
+    http_method_names = ['get', 'head', 'options']
 
     def get_queryset(self):
         return BlogEntry.objects.filter(user=self.kwargs['user_pk'])
+
+
+class BlogEntryViewSet(viewsets.ModelViewSet):
+    queryset = BlogEntry.objects.all()
+    serializer_class = BlogEntrySerializer
+    http_method_names = ['get', 'head', 'options', 'post', 'delete']
