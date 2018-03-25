@@ -59,11 +59,19 @@ class UserBlogEntryApiTests(APITestCase):
         )
 
     def test_blog_entry_list(self):
-        response = self.client.get('/api/v1/blogentries/')
+        response = self.client.get('/api/v1/users/{}/blogentries/'.format(self.dummy_user1.id))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), 4)
+        self.assertEqual(len(response.data), 2)
 
-    def test_blog_entry_post(self):
+        response = self.client.get('/api/v1/users/{}/blogentries/'.format(self.dummy_user2.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 2)
+
+        response = self.client.get('/api/v1/users/{}/blogentries/'.format(self.dummy_user3.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 0)
+
+    def test_method_not_allowd(self):
         entry = {
             'title': 'dummy_entry5',
             'content': 'dummy_content5',
@@ -71,27 +79,15 @@ class UserBlogEntryApiTests(APITestCase):
             'category': '{}'.format(self.dummy_category1.id),
             'user': '{}'.format(self.dummy_user1.id)
         }
-        response = self.client.post('/api/v1/blogentries/', data=entry)
-        self.assertEqual(response.status_code, 201)
-        response = self.client.get('/api/v1/blogentries/')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), 5)
+        response = self.client.post('/api/v1/users/{}/blogentries/'.format(self.dummy_user1.id), data=entry)
+        self.assertEqual(response.status_code, 405)
 
-    def test_blog_entry_delete(self):
+        response = self.client.put('/api/v1/users/{}/blogentries/'.format(self.dummy_user1.id), data=entry)
+        self.assertEqual(response.status_code, 405)
+
         response = self.client.delete(
-            '/api/v1/blogentries/{}/'.format(self.dummy_entry1.id))
-        self.assertEqual(response.status_code, 204)
-        response = self.client.get('/api/v1/blogentries/')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), 3)
-
-    def test_method_not_allowd(self):
-        entry = {
-            'title': 'dummy_entry5',
-            'content': 'dummy_content5',
-            'created_at': '2018-03-01T00:00:00+09:00',
-            'category': '{"name": "dummy_category1"}',
-            'user': '{"id": "dummy_qiita_user1"}'
-        }
-        response = self.client.put('/api/v1/blogentries/', data=entry)
+            '/api/v1/users/{}/blogentries/{}/'.format(
+                self.dummy_user1.id, self.dummy_entry1.id
+            )
+        )
         self.assertEqual(response.status_code, 405)
