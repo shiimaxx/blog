@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'aggregator',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_swagger'
 ]
 
@@ -127,3 +128,12 @@ STATIC_URL = '/static/'
 # Authentication
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# Django REST framework authentication
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
