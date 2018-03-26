@@ -2,7 +2,7 @@ from rest_framework import viewsets
 
 from blog.models import BlogEntry
 from blog.serializer import BlogEntrySerializer
-from blog.permissions import IsOwner
+from blog.permissions import IsOwnerOrReadOnly
 
 
 class UserBlogEntryViewSet(viewsets.ModelViewSet):
