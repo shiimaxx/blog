@@ -2,6 +2,7 @@ from rest_framework import viewsets
 
 from blog.models import BlogEntry
 from blog.serializer import BlogEntrySerializer
+from blog.permissions import IsOwner
 
 
 class UserBlogEntryViewSet(viewsets.ModelViewSet):
@@ -16,3 +17,4 @@ class BlogEntryViewSet(viewsets.ModelViewSet):
     queryset = BlogEntry.objects.all()
     serializer_class = BlogEntrySerializer
     http_method_names = ['get', 'head', 'options', 'post', 'delete']
+    permission_classes = (IsOwner,)
