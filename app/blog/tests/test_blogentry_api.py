@@ -73,6 +73,19 @@ class UserBlogEntryApiTests(APITestCase):
             'user': '{}'.format(self.dummy_user1.id)
         }
         response = self.client.post('/api/v1/blogentries/', data=entry)
+        self.assertEqual(response.status_code, 401)
+
+    def test_blog_entry_post_with_authenticate(self):
+        token = Token.objects.create(user=self.dummy_user1)
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token.key))
+        entry = {
+            'title': 'dummy_entry5',
+            'content': 'dummy_content5',
+            'created_at': '2018-03-01T00:00:00+09:00',
+            'category': '{}'.format(self.dummy_category1.id),
+            'user': '{}'.format(self.dummy_user1.id)
+        }
+        response = self.client.post('/api/v1/blogentries/', data=entry)
         self.assertEqual(response.status_code, 201)
         response = self.client.get('/api/v1/blogentries/')
         self.assertEqual(response.status_code, 200)
@@ -93,7 +106,20 @@ class UserBlogEntryApiTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 3)
 
-    def test_method_not_allowd(self):
+    def test_blog_entry_put(self):
+        entry = {
+            'title': 'dummy_entry5',
+            'content': 'dummy_content5',
+            'created_at': '2018-03-01T00:00:00+09:00',
+            'category': '{"name": "dummy_category1"}',
+            'user': '{"id": "dummy_qiita_user1"}'
+        }
+        response = self.client.put('/api/v1/blogentries/', data=entry)
+        self.assertEqual(response.status_code, 401)
+
+    def test_blog_entry_put_with_authenticate(self):
+        token = Token.objects.create(user=self.dummy_user1)
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token.key))
         entry = {
             'title': 'dummy_entry5',
             'content': 'dummy_content5',
