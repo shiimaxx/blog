@@ -17,4 +17,4 @@ class BlogEntryViewSet(viewsets.ModelViewSet):
     queryset = BlogEntry.objects.all()
     serializer_class = BlogEntrySerializer
     http_method_names = ['get', 'head', 'options', 'post', 'delete']
-    permission_classes = (IsOwner,)
+    permission_classes = (IsOwnerOrReadOnly,)
