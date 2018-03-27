@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 from pytz import timezone
 
@@ -78,6 +79,13 @@ class UserBlogEntryApiTests(APITestCase):
         self.assertEqual(len(response.data), 5)
 
     def test_blog_entry_delete(self):
+        response = self.client.delete(
+            '/api/v1/blogentries/{}/'.format(self.dummy_entry1.id))
+        self.assertEqual(response.status_code, 401)
+
+    def test_blog_entry_delete_with_authenticate(self):
+        token = Token.objects.create(user=self.dummy_user1)
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token.key))
         response = self.client.delete(
             '/api/v1/blogentries/{}/'.format(self.dummy_entry1.id))
         self.assertEqual(response.status_code, 204)
