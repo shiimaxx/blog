@@ -18,3 +18,6 @@ class BlogEntryViewSet(viewsets.ModelViewSet):
     serializer_class = BlogEntrySerializer
     http_method_names = ['get', 'head', 'options', 'post', 'delete']
     permission_classes = (IsOwnerOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
